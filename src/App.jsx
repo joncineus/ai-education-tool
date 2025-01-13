@@ -1,7 +1,7 @@
 import { Breadcrumb } from "./component/Breadcrumb"
 import Header from "./component/Header"
 import Footer from "./component/Footer"
-import {CourseList} from "./component/CourseList"
+import {CourseList} from "./component/Courselist"
 import CourseFilter from "./component/Filter"
 
 function App() {
