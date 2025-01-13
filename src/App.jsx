@@ -1,26 +1,12 @@
-import { Breadcrumb } from "./component/Breadcrumb"
-import Header from "./component/Header"
-import Footer from "./component/Footer"
-import {CourseList} from "./component/CourseList"
-import CourseFilter from "./component/Filter"
+
 
 function App() {
+
   return (
-    <>
-      <div>
-        <Header />
-      </div>
-      <div>
-        <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Courses", href: "/courses" }]} />
-      </div>
-      <div className="container mx-auto px-4 flex">
-        <CourseList />
-        <CourseFilter />
-      </div>
-      <div>
-        <Footer />
-      </div>
-    </>
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <h1 className="text-4xl font-bold">AI Education Tool</h1>
+      <h2 className="text-2xl font-semibold">The start of our amazing project</h2>
+    </div>
   )
 }
 
