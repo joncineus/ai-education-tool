@@ -3,6 +3,8 @@ import Pagination from '../( components )/Pagination'
 import Footer from '../( components )/Footer'
 import SearchBar from '../( components )/Searchbar'
 import FilterSidebar from '../( components )/Sidebar';
+import FeaturedCourses from '../( components )/Features';
+import React, { useState, useRef } from 'react';
 
 const courses = [
   {
@@ -89,17 +91,10 @@ export default function App() {
         <div className="flex gap-8">
             <div>
                 <SearchBar />
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {courses.map(course => (
-                    <CourseCard key={course.id} course={course} />
-                ))}
-                </div>
-                <Pagination />
+                <FeaturedCourses />
             </div>
-            <FilterSidebar />
         </div>
       </main>
-      <Footer />
     </div>
   )
 }

@@ -7,9 +7,7 @@ const NavigationBar = () => {
     { title: 'Home', href: '/' },
     { title: 'Courses', href: '/courses' },
     { title: 'Quizzes', href: '/quiz' },
-    { title: 'Community', href: '/community' },
     { title: 'Study Assistant', href: '/study-assistant' },
-    { title: 'Premium Theme', href: '/premiumtheme' },
   ]
 
   return (
@@ -31,15 +29,10 @@ const NavigationBar = () => {
           </nav>
 
           <div className="flex items-center gap-4">
-            <button className="text-gray-600 hover:text-gray-900">
-              <Search className="h-5 w-5" />
+            <button className="bg-orange-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-orange-600">
+              Upload Notes
             </button>
-            <a
-              href="/login"
-              className="text-gray-600 hover:text-gray-900"
-            >
-              Login / Register
-            </a>
+           
           </div>
         </div>
       </div>

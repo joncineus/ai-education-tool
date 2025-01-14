@@ -5,6 +5,7 @@ import NavigationBar from "./NavigationBar"
 import Community from "./( pages )/Community"
 import Chat from "./( pages )/Chat"
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import Footer from "./( components )/Footer"
 
 function App() {
 
