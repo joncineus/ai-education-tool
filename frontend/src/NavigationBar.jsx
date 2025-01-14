@@ -6,7 +6,7 @@ const NavigationBar = () => {
   const navItems = [
     { title: 'Home', href: '/' },
     { title: 'Courses', href: '/courses' },
-    { title: 'Quizzes', href: '/quizzes' },
+    { title: 'Quizzes', href: '/quiz' },
     { title: 'Community', href: '/community' },
     { title: 'Study Assistant', href: '/study-assistant' },
     { title: 'Premium Theme', href: '/premiumtheme' },
