@@ -3,23 +3,31 @@ from config import Config
 
 # Setup OpenAI API key
 openai.api_key = Config.OPENAI_API_KEY
+conversation_history = []
 
 def get_ai_response(notes_content, user_query):
-    prompt = f"Here are the class notes: {notes_content}\nUser query: {user_query}"
+    global conversation_history
+
+    # Add the class notes as context only if it's the start of a new conversation
+    if len(conversation_history) == 0:
+        conversation_history.append({"role": "system", "content": "You are a helpful assistant."})
+        conversation_history.append({"role": "user", "content": f"Here are the class notes: {notes_content}"})
+
+    # Append the user's query to the conversation history
+    conversation_history.append({"role": "user", "content": user_query})
     
+    # Call the OpenAI API
     response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",  
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": prompt}
-        ],
+        model="gpt-3.5-turbo",
+        messages=conversation_history,
         max_tokens=150
     )
     
-    return response['choices'][0]['message']['content'].strip()
-
-
-import openai
+    # Get the AI's response and add it to the conversation history
+    ai_response = response['choices'][0]['message']['content'].strip()
+    conversation_history.append({"role": "assistant", "content": ai_response})
+    
+    return ai_response
 
 def generate_easy_quiz_from_notes(notes_content):
     prompt = f"""
