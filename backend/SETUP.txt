@@ -1,0 +1,47 @@
+set up instructions 
+
+1. download postgresql
+    - create a user and make a database called eduation
+
+2. create a file named .env and add these codes into it and change the password to your password. also get openai api key
+DATABASE_URL=postgresql://postgres:password@localhost/education
+OPENAI_API_KEY=
+# might need to pay 5 dollars to use the api. I had to pay at least 
+
+
+
+
+#testing database interaction
+#open a new terminal while running the backend and copy this into terminal in order to mimic storing and generating
+# 1. Test create_class
+curl -X POST http://127.0.0.1:5000/create_class \
+-H "Content-Type: application/json" \
+-d '{"name": "Physics 101", "description": "A beginner-level physics course."}'
+
+# 2. Test upload_notes
+curl -X POST http://127.0.0.1:5000/upload_notes \
+-H "Content-Type: application/json" \
+-d '{"class_id": 1, "title": "Kinematics Notes", "content": "Kinematics is the study of motion without considering its causes."}'
+
+# # 3. Test chat_with_ai
+curl -X POST http://127.0.0.1:5000/chat_with_ai \
+-H "Content-Type: application/json" \
+-d '{"class_id": 1, "query": "What is kinematics?"}'
+
+# 4. Test generate_easy_quiz
+curl -X POST http://127.0.0.1:5000/generate_easy_quiz \
+-H "Content-Type: application/json" \
+-d '{"class_id": 1}'
+
+# 5. Test generate_medium_quiz
+curl -X POST http://127.0.0.1:5000/generate_medium_quiz \
+-H "Content-Type: application/json" \
+-d '{"class_id": 1}'
+
+# 6. Test generate_hard_quiz
+curl -X POST http://127.0.0.1:5000/generate_hard_quiz \
+-H "Content-Type: application/json" \
+-d '{"class_id": 1}'
+
+
+
