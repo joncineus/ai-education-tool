@@ -30,7 +30,6 @@ const Quiz = () => {
           </div>
           <Sidebar />
       </div>
-      <Footer />
     </>
   );
 };
