@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Search, Clock, Users, BookOpen, Star, Filter, ChevronDown, ChevronUp } from 'lucide-react';
+import { Search, Clock, Users, BookOpen, Star, Filter, ChevronDown, ChevronUp, RefreshCw } from 'lucide-react';
 import SearchBar from './Searchbar';
 
 const CourseCard = ({ course }) => {
@@ -57,7 +57,7 @@ const CourseCard = ({ course }) => {
           </div>
           <div className="flex items-center gap-1">
             <BookOpen size={16} />
-            <span>{course.lessons} Lessons</span>
+            <span>{course.lessons}</span>
           </div>
         </div>
 
@@ -270,13 +270,19 @@ const FeaturedCourses = () => {
     ? filteredCourses 
     : filteredCourses.slice(0, visibleCourses);
 
+  const handleResetFilters = () => {
+    setSelectedCategory('all');
+    setSortBy('popular');
+    setSearchQuery('');
+  };
+
   return (
     <section className="p-10">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl font-bold text-gray-800">Your Courses</h2>
           <div className="flex items-center gap-4">
-            <div className="w-64">
+            <div className="w-64 relative">
               <input
                 type="text"
                 placeholder="Search courses..."
@@ -284,6 +290,14 @@ const FeaturedCourses = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                >
+                  ×
+                </button>
+              )}
             </div>
             <div className="flex gap-2">
               <select
@@ -296,25 +310,57 @@ const FeaturedCourses = () => {
                 <option value="price-low">Price: Low to High</option>
                 <option value="price-high">Price: High to Low</option>
               </select>
+              <button
+                onClick={handleResetFilters}
+                className="flex items-center gap-2 px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                title="Reset all filters"
+              >
+                <RefreshCw size={16} />
+                <span className="hidden sm:inline">Reset Filters</span>
+              </button>
             </div>
           </div>
         </div>
 
-        <div className="flex gap-4 mb-8 overflow-x-auto pb-2">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setSelectedCategory(category.toLowerCase())}
-              className={`px-4 py-2 rounded-lg whitespace-nowrap transition-colors ${
-                selectedCategory === category.toLowerCase()
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-white text-gray-600 hover:bg-gray-100'
-              }`}
-            >
-              {category}
-            </button>
-          ))}
+        <div className="flex items-center gap-4 mb-8 overflow-x-auto pb-2">
+          <div className="flex gap-2 flex-1">
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category.toLowerCase())}
+                className={`px-4 py-2 rounded-lg whitespace-nowrap transition-colors ${
+                  selectedCategory === category.toLowerCase()
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-white text-gray-600 hover:bg-gray-100'
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
         </div>
+
+        {/* Show active filters if any */}
+        {(selectedCategory !== 'all' || sortBy !== 'popular' || searchQuery) && (
+          <div className="flex items-center gap-2 mb-4 text-sm text-gray-600">
+            <span>Active filters:</span>
+            {selectedCategory !== 'all' && (
+              <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full">
+                Category: {selectedCategory}
+              </span>
+            )}
+            {sortBy !== 'popular' && (
+              <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full">
+                Sort: {sortBy.replace('-', ' ')}
+              </span>
+            )}
+            {searchQuery && (
+              <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full">
+                Search: {searchQuery}
+              </span>
+            )}
+          </div>
+        )}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {displayedCourses.map((course, index) => (

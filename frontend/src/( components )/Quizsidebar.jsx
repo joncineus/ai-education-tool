@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { ChevronDown, X } from 'lucide-react';
+import { ChevronDown, X, RefreshCw } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-function Sidebar({ onCategorySelect, onTagSelect, className, isOpen, onClose }) {
+function Sidebar({ onCategorySelect, onTagSelect, onReset, className, isOpen, onClose, activeFilters }) {
   const [expandedSections, setExpandedSections] = useState(['category', 'recent', 'tags']);
 
   const categories = [
@@ -60,6 +60,19 @@ function Sidebar({ onCategorySelect, onTagSelect, className, isOpen, onClose }) 
       z-50 md:z-0
       w-80
     `}>
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="font-bold text-xl">Filters</h2>
+        {/* Reset button */}
+        <button
+          onClick={onReset}
+          className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors"
+          title="Reset all filters"
+        >
+          <RefreshCw size={16} />
+          <span className="text-sm">Reset</span>
+        </button>
+      </div>
+
       {/* Mobile close button */}
       <button 
         onClick={onClose}
@@ -89,7 +102,13 @@ function Sidebar({ onCategorySelect, onTagSelect, className, isOpen, onClose }) 
                 <li
                   key={category.name}
                   onClick={() => onCategorySelect?.(category.name)}
-                  className="flex justify-between text-gray-700 hover:text-blue-600 cursor-pointer transition-colors"
+                  className={`
+                    flex justify-between text-gray-700 cursor-pointer transition-colors
+                    ${activeFilters.category === category.name.toLowerCase() 
+                      ? 'text-blue-600 font-medium' 
+                      : 'hover:text-blue-600'
+                    }
+                  `}
                 >
                   <span>{category.name}</span>
                   <span className="bg-gray-100 px-2 rounded-full text-sm">
@@ -154,8 +173,13 @@ function Sidebar({ onCategorySelect, onTagSelect, className, isOpen, onClose }) 
                 <span
                   key={tag.name}
                   onClick={() => onTagSelect?.(tag.name)}
-                  className="text-sm bg-gray-100 hover:bg-blue-100 text-gray-700 hover:text-blue-600 
-                          px-3 py-1 rounded-full cursor-pointer transition-colors"
+                  className={`
+                    text-sm px-3 py-1 rounded-full cursor-pointer transition-colors
+                    ${activeFilters.tag === tag.name.toLowerCase()
+                      ? 'bg-blue-100 text-blue-600'
+                      : 'bg-gray-100 text-gray-700 hover:bg-blue-50 hover:text-blue-600'
+                    }
+                  `}
                 >
                   {tag.name} ({tag.count})
                 </span>

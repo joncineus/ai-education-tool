@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import { Grid, Search, Filter, Clock, BookOpen, Award } from "lucide-react";
+import { Grid, Search, Filter, Clock, BookOpen, Award, RefreshCw } from "lucide-react";
 import Sidebar from "../( components )/Quizsidebar.jsx";
 import PostCard from "../( components )/PostCard";
 import SearchBar from "../( components )/Searchbar";
@@ -34,18 +34,19 @@ const QuizCategories = ({ activeCategory, onCategoryChange }) => {
   );
 };
 
-const QuizFilters = ({ onFilterChange }) => {
-  const filters = [
+const QuizFilters = ({ onFilterChange, onReset, filters }) => {
+  const filterOptions = [
     { label: 'Difficulty', options: ['Beginner', 'Intermediate', 'Advanced'] },
     { label: 'Duration', options: ['< 15 mins', '15-30 mins', '> 30 mins'] },
     { label: 'Type', options: ['Multiple Choice', 'True/False', 'Mixed'] },
   ];
 
   return (
-    <div className="flex gap-4 mb-6">
-      {filters.map((filter) => (
+    <div className="flex items-center gap-4 mb-6">
+      {filterOptions.map((filter) => (
         <select
           key={filter.label}
+          value={filters[filter.label.toLowerCase()] || ''}
           onChange={(e) => onFilterChange(filter.label.toLowerCase(), e.target.value)}
           className="px-4 py-2 border rounded-lg text-gray-600 bg-white hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
@@ -57,6 +58,13 @@ const QuizFilters = ({ onFilterChange }) => {
           ))}
         </select>
       ))}
+      <button
+        onClick={onReset}
+        className="flex items-center gap-2 px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+      >
+        <RefreshCw size={16} />
+        Reset Filters
+      </button>
     </div>
   );
 };
@@ -66,7 +74,9 @@ const Quiz = () => {
   const [filters, setFilters] = useState({
     difficulty: '',
     duration: '',
-    type: ''
+    type: '',
+    category: '',
+    tag: ''
   });
   const [view, setView] = useState('grid');
   const [searchTerm, setSearchTerm] = useState('');
@@ -189,6 +199,18 @@ const Quiz = () => {
     setFilters(prev => ({ ...prev, [filterType]: value.toLowerCase() }));
   };
 
+  const handleResetFilters = () => {
+    setFilters({
+      difficulty: '',
+      duration: '',
+      type: '',
+      category: '',
+      tag: ''
+    });
+    setActiveCategory('all');
+    setSearchTerm('');
+  };
+
   const getDurationInMinutes = (durationStr) => {
     return parseInt(durationStr.split(' ')[0]);
   };
@@ -285,7 +307,11 @@ const Quiz = () => {
               onCategoryChange={setActiveCategory}
             />
 
-            <QuizFilters onFilterChange={handleFilterChange} />
+            <QuizFilters 
+              onFilterChange={handleFilterChange}
+              onReset={handleResetFilters}
+              filters={filters}
+            />
 
             <div className={`grid ${
               view === 'grid' 
@@ -321,8 +347,10 @@ const Quiz = () => {
             className="hidden md:block w-80 flex-shrink-0"
             onCategorySelect={handleCategorySelect}
             onTagSelect={handleTagSelect}
+            onReset={handleResetFilters}
             isOpen={isSidebarOpen}
             onClose={() => setIsSidebarOpen(false)}
+            activeFilters={filters}
           />
         </div>
       </div>
