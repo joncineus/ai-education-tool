@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Categories = () => {
-  const categories = [
+  const categories = [ //Create a map of data that will tag course that is created by subject through AI
     { name: 'Art & Design', count: 33 },
     { name: 'Development', count: 38 },
     { name: 'Communication', count: 38 },
@@ -16,7 +16,8 @@ const Categories = () => {
 
   return (
     <section className="p-10">
-      <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Top Categories</h2>
+      <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Top Note Categories</h2> 
+      {/*This will show the most popular note categories that are made by all the users*/}
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
         {categories.map((category, index) => (
           <div

@@ -3,84 +3,68 @@ import Pagination from '../( components )/Pagination'
 import Footer from '../( components )/Footer'
 import SearchBar from '../( components )/Searchbar'
 import FilterSidebar from '../( components )/Sidebar';
+import FeaturedCourses from '../( components )/Features';
+import { useState } from 'react';
 
 const courses = [
   {
-    id: 1,
     title: 'Create An LMS Website With LearnPress',
-    author: 'DemonstrateProfits',
-    image: 'https://v0.dev/placeholder.svg',
-    rating: 4.5,
-    students: 156,
-    price: 0,
+    duration: '7 Weeks',
+    students: '136',
+    price: '$29.0',
+    discountPrice: '$25.0',
+    image: '/images/OIP.jpeg',
   },
   {
-    id: 2,
-    title: "Complete Web Development Bootcamp",
-    instructor: "Sarah Johnson",
-    price: 99.99,
-    rating: 4.8,
-    reviews: 2150,
-    image: "/placeholder.svg?height=200&width=400",
-    category: "Development",
-    duration: "48 hours",
+    title: 'Design A Website With ThimPress',
+    duration: '7 Weeks',
+    students: '156',
+    price: '$59.0',
+    discountPrice: '$49.0',
+    image: '/images/OIP.jpeg',
   },
   {
-    id: 3,
-    title: "Digital Marketing Masterclass",
-    instructor: "Mike Wilson",
-    price: 89.99,
-    rating: 4.6,
-    reviews: 1830,
-    image: "/placeholder.svg?height=200&width=400",
-    category: "Business",
-    duration: "32 hours",
+    title: 'Mastering JavaScript',
+    duration: '6 Weeks',
+    students: '200',
+    price: '$39.0',
+    discountPrice: '$35.0',
+    image: '/images/OIP.jpeg',
   },
   {
-    id: 4,
-    title: "UI/UX Design Fundamentals",
-    instructor: "Emily Chen",
-    price: 79.99,
-    rating: 4.7,
-    reviews: 1550,
-    image: "/placeholder.svg?height=200&width=400",
-    category: "Design",
-    duration: "24 hours",
+    title: 'Advanced CSS Techniques',
+    duration: '5 Weeks',
+    students: '180',
+    price: '$49.0',
+    discountPrice: '$45.0',
+    image: '/images/OIP.jpeg',
   },
   {
-    id: 5,
-    title: "Python for Data Science",
-    instructor: "David Kim",
-    price: 94.99,
-    rating: 4.9,
-    reviews: 2750,
-    image: "/placeholder.svg?height=200&width=400",
-    category: "Development",
-    duration: "36 hours",
+    title: 'React for Beginners',
+    duration: '8 Weeks',
+    students: '220',
+    price: '$69.0',
+    discountPrice: '$59.0',
+    image: '/images/OIP.jpeg',
   },
   {
-    id: 6,
-    title: "Photography Masterclass",
-    instructor: "Lisa Anderson",
-    price: 69.99,
-    rating: 4.5,
-    reviews: 1250,
-    image: "/placeholder.svg?height=200&width=400",
-    category: "Photography",
-    duration: "20 hours",
+    title: 'Node.js and Express',
+    duration: '7 Weeks',
+    students: '150',
+    price: '$59.0',
+    discountPrice: '$50.0',
+    image: '/images/OIP.jpeg',
   },
   {
-    id: 7,
-    title: "Music Production Basics",
-    instructor: "James Wilson",
-    price: 59.99,
-    rating: 4.4,
-    reviews: 850,
-    image: "/placeholder.svg?height=200&width=400",
-    category: "Music",
-    duration: "16 hours",
+    title: 'Python Programming',
+    duration: '10 Weeks',
+    students: '300',
+    price: '$79.0',
+    discountPrice: '$69.0',
+    image: '/images/OIP.jpeg',
   },
 ];
+
 
 export default function App() {
   return (
@@ -88,15 +72,9 @@ export default function App() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex gap-8">
             <div>
-                <SearchBar />
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {courses.map(course => (
-                    <CourseCard key={course.id} course={course} />
-                ))}
-                </div>
-                <Pagination />
+                <SearchBar/>
+                <FeaturedCourses/>
             </div>
-            <FilterSidebar />
         </div>
       </main>
     </div>
