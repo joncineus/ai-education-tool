@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Send, RotateCw, Bot, User, Copy, Check, Search } from 'lucide-react';
 import axios from 'axios';
 import NavigationBar from '../NavigationBar';
+import Breadcrumb from '../( components )/Breadcrumb';
 
 const WelcomeScreen = () => (
   <div className="flex flex-col items-center justify-center h-full bg-white">
@@ -132,6 +133,7 @@ const ChatInterface = () => {
   return (
     <div className="h-screen flex flex-col">
       <NavigationBar />
+      <Breadcrumb />
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar */}
         <div className="w-64 bg-white border-r border-gray-200 flex flex-col">
