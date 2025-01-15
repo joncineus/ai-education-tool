@@ -2,6 +2,8 @@ import React from "react";
 import Sidebar from "../( components )/Quizsidebar.jsx";
 import PostCard from "../( components )/PostCard";
 import SearchBar from "../( components )/Searchbar";
+import NavigationBar from "../NavigationBar.jsx";
+import Footer from "../( components )/Footer.jsx";
 
 const Quiz = () => {
   const posts = [
@@ -13,6 +15,7 @@ const Quiz = () => {
 
   return (
     <>
+      <NavigationBar />
       <div className="max-w-7xl justify-center mx-auto px-4 sm:px-6 lg:px-10 py-8 flex gap-4">
         <div className="flex-1 max-w-6xl">
             <div className="flex justify-between items-center mb-6">
@@ -29,6 +32,7 @@ const Quiz = () => {
           </div>
           <Sidebar />
       </div>
+      <Footer />
     </>
   );
 };

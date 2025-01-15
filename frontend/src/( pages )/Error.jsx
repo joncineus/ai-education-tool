@@ -1,8 +1,10 @@
 import React from "react";
+import NavigationBar from "../NavigationBar";
 
 const ErrorPage = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <NavigationBar />
       <div className="w-96 h-auto">
         {/* Replace with your image source */}
         <img
@@ -21,6 +23,7 @@ const ErrorPage = () => {
       >
         Go Back to Home
       </button>
+      <Footer />
     </div>
   );
 };
