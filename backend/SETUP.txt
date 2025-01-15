@@ -8,7 +8,7 @@ DATABASE_URL=postgresql://postgres:password@localhost/education
 OPENAI_API_KEY=
 # might need to pay 5 dollars to use the api. I had to pay at least 
 
-
+to run do: python app.py
 
 
 #testing database interaction
@@ -17,31 +17,44 @@ OPENAI_API_KEY=
 curl -X POST http://127.0.0.1:5000/create_class \
 -H "Content-Type: application/json" \
 -d '{"name": "Physics 101", "description": "A beginner-level physics course."}'
+Invoke-WebRequest -Uri "http://127.0.0.1:5000/create_class" -Method POST -Headers @{ "Content-Type" = "application/json" } -Body '{"name": "Physics 101", "description": "A beginner-level physics course."}'
 
 # 2. Test upload_notes
 curl -X POST http://127.0.0.1:5000/upload_notes \
 -H "Content-Type: application/json" \
 -d '{"class_id": 1, "title": "Kinematics Notes", "content": "Kinematics is the study of motion without considering its causes."}'
 
+Invoke-WebRequest -Uri "http://127.0.0.1:5000/upload_notes" -Method POST -Headers @{ "Content-Type" = "application/json" } -Body '{"class_id": 1, "title": "Kinematics Notes", "content": "Kinematics is the study of motion without considering its causes."}'
+
 # # 3. Test chat_with_ai
 curl -X POST http://127.0.0.1:5000/chat_with_ai \
 -H "Content-Type: application/json" \
 -d '{"class_id": 1, "query": "What is kinematics?"}'
+
+Invoke-WebRequest -Uri "http://127.0.0.1:5000/chat_with_ai" -Method POST -Headers @{ "Content-Type" = "application/json" } -Body '{"class_id": 1, "query": "What is kinematics?"}'
 
 # 4. Test generate_easy_quiz
 curl -X POST http://127.0.0.1:5000/generate_easy_quiz \
 -H "Content-Type: application/json" \
 -d '{"class_id": 1}'
 
+Invoke-WebRequest -Uri "http://127.0.0.1:5000/generate_easy_quiz" -Method POST -Headers @{ "Content-Type" = "application/json" } -Body '{"class_id": 1}'
+
+
 # 5. Test generate_medium_quiz
 curl -X POST http://127.0.0.1:5000/generate_medium_quiz \
 -H "Content-Type: application/json" \
 -d '{"class_id": 1}'
 
+Invoke-WebRequest -Uri "http://127.0.0.1:5000/generate_medium_quiz" -Method POST -Headers @{ "Content-Type" = "application/json" } -Body '{"class_id": 1}'
+
+
 # 6. Test generate_hard_quiz
 curl -X POST http://127.0.0.1:5000/generate_hard_quiz \
 -H "Content-Type: application/json" \
 -d '{"class_id": 1}'
+
+Invoke-WebRequest -Uri "http://127.0.0.1:5000/generate_hard_quiz" -Method POST -Headers @{ "Content-Type" = "application/json" } -Body '{"class_id": 1}'
 
 
 
