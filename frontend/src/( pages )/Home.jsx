@@ -9,9 +9,7 @@ function Home() {
     <>
     <NavigationBar />
     <HeroSection />
-    <section className="p-10 max-w-7xl justify-center mx-auto">
       <Categories />
-    </section>
     <Footer />
     </>
   )

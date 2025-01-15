@@ -3,6 +3,7 @@ import SearchBar from '../( components )/Searchbar'
 import FeaturedCourses from '../( components )/Features';
 import NavigationBar from '../NavigationBar';
 import { useState } from 'react';
+import Breadcrumb from '../( components )/Breadcrumb';
 
 const courses = [
   {
@@ -68,13 +69,9 @@ export default function App() {
   return (
     <div className="min-h-screen bg-white">
       <NavigationBar />
+      <Breadcrumb />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex gap-8">
-            <div>
-                <SearchBar/>
-                <FeaturedCourses/>
-            </div>
-        </div>
+        <FeaturedCourses/>
       </main>
       <Footer />
     </div>
