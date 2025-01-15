@@ -5,9 +5,9 @@ import Community from "./( pages )/Community";
 import Login from "./( pages )/Login";
 import ErrorPage from "./( pages )/Error";
 import FAQ from "./( pages )/FAQs";
-import Chat from "./( pages )/Chat";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ChatInterface from "./( pages )/AIChat";
+import AddNewClass from "./( pages )/AddNewClass";
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
           <Route exact path="/study-assistant" element={<ChatInterface />} /> 
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/faq" element={<FAQ />} />
-          <Route exact path="/chat" element={<Chat />} />
+          <Route exact path="/create-course" element={<AddNewClass />} />
           <Route path="*" element={<ErrorPage />} /> 
         </Routes>
       </div>
