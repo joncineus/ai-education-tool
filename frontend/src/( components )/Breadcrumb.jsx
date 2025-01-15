@@ -18,7 +18,7 @@ const Breadcrumb = () => {
   };
 
   return (
-    <div className="bg-gray-50 border-b border-gray-100">
+    <div className="bg-gray-50 border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav className="flex items-center space-x-2 text-sm text-gray-600 py-4">
           <Link 
