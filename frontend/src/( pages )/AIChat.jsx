@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Search, Send, ChevronDown } from 'lucide-react';
+import { Search, Send } from 'lucide-react';
+import axios from 'axios';
+import Logo from '../Logo';
 
 const ChatMessage = ({ message, isAi }) => {
   return (
@@ -30,7 +32,36 @@ const ChatHistory = ({ histories }) => {
 
 const ChatInterface = () => {
   const [message, setMessage] = useState('');
-  
+  const [chatHistory, setChatHistory] = useState([
+    { message: "The main principles of evolution include natural selection, genetic drift, mutation, gene flow, and speciation.", isAi: true },
+    { message: "How does natural selection act in evolution?", isAi: false },
+    { message: "Natural selection is a process where individuals with advantageous traits for their environment have a higher chance of surviving and reproducing. Over time, these beneficial traits become more common in a population, leading to evolutionary changes.", isAi: true }
+  ]);
+  const [loading, setLoading] = useState(false);
+
+  const handleSendMessage = async () => {
+    if (message.trim() === '') return;
+
+    const newMessage = { message, isAi: false };
+    setChatHistory([...chatHistory, newMessage]);
+    setMessage('');
+    setLoading(true);
+
+    try {
+      const response = await axios.post('http://127.0.0.1:5000/chat_with_ai', {
+        query: message,
+        class_id: 1 // Replace with the actual class ID
+      });
+
+      const aiResponse = response.data.response;
+      setChatHistory((prevChatHistory) => [...prevChatHistory, { message: aiResponse, isAi: true }]);
+    } catch (error) {
+      console.error('Error sending message:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const timeCategories = {
     'Today': [
       'Help me understand quantum...',
@@ -56,7 +87,7 @@ const ChatInterface = () => {
       {/* Sidebar */}
       <div className="w-64 bg-white border-r border-gray-200 p-4 flex flex-col">
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-orange-500">FikraSpace</h1>
+          <Logo />
         </div>
         
         <div className="mb-4 relative">
@@ -96,18 +127,14 @@ const ChatInterface = () => {
 
         {/* Chat Messages */}
         <div className="flex-1 overflow-y-auto p-6">
-          <ChatMessage
-            isAi={true}
-            message="The main principles of evolution include natural selection, genetic drift, mutation, gene flow, and speciation."
-          />
-          <ChatMessage
-            isAi={false}
-            message="How does natural selection act in evolution?"
-          />
-          <ChatMessage
-            isAi={true}
-            message="Natural selection is a process where individuals with advantageous traits for their environment have a higher chance of surviving and reproducing. Over time, these beneficial traits become more common in a population, leading to evolutionary changes."
-          />
+          {chatHistory.map((chat, index) => (
+            <ChatMessage key={index} message={chat.message} isAi={chat.isAi} />
+          ))}
+          {loading && (
+            <div className="flex items-center justify-center">
+              <div className="loader"></div>
+            </div>
+          )}
         </div>
 
         {/* Message Input */}
@@ -120,8 +147,8 @@ const ChatInterface = () => {
               placeholder="Type here"
               className="w-full p-3 pr-10 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
             />
-            <button className="absolute right-3 top-3 text-orange-500">
-              <Send size={20} />
+            <button onClick={handleSendMessage} className="absolute right-3 top-3 text-orange-500">
+              <Send />
             </button>
           </div>
         </div>

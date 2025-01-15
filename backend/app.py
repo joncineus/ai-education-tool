@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 from models import db
 from routes import create_class, upload_notes, chat_with_ai, generate_easy_quiz,generate_medium_quiz,generate_hard_quiz
 from config import Config
@@ -7,6 +8,9 @@ from config import Config
 app = Flask(__name__)
 app.config.from_object(Config)
 db.init_app(app)
+
+#Enable CORS
+CORS(app)
 
 
 with app.app_context():
