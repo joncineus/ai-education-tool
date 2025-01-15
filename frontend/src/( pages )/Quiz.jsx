@@ -5,6 +5,7 @@ import PostCard from "../( components )/PostCard";
 import SearchBar from "../( components )/Searchbar";
 import NavigationBar from "../NavigationBar.jsx";
 import Footer from "../( components )/Footer.jsx";
+import Breadcrumb from "../( components )/Breadcrumb.jsx";
 
 const QuizCategories = ({ activeCategory, onCategoryChange }) => {
   const categories = [
@@ -272,6 +273,7 @@ const Quiz = () => {
   return (
     <>
       <NavigationBar />
+      <Breadcrumb />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-8">
         <div className="flex gap-8 relative">
           <div className="flex-1">
