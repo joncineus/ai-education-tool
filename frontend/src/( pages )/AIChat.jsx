@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Send, RotateCw, Bot, User, Copy, Check, Search } from 'lucide-react';
 import axios from 'axios';
 import NavigationBar from '../NavigationBar';
-import Logo from '../Logo';
 
 const WelcomeScreen = () => (
   <div className="flex flex-col items-center justify-center h-full bg-white">
