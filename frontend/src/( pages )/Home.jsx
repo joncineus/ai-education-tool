@@ -18,7 +18,6 @@ function Home() {
       <Feedback />
       <Articles />
     </section>
-    <Footer />
     </>
   )
 }

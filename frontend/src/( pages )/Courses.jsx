@@ -99,7 +99,6 @@ export default function App() {
             <FilterSidebar />
         </div>
       </main>
-      <Footer />
     </div>
   )
 }

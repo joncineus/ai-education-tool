@@ -1,7 +1,6 @@
 import React from "react";
 import Sidebar from "../( components )/Quizsidebar.jsx";
 import PostCard from "../( components )/PostCard";
-import Footer from "../( components )/Footer";
 import SearchBar from "../( components )/Searchbar";
 
 const Quiz = () => {
@@ -30,7 +29,6 @@ const Quiz = () => {
           </div>
           <Sidebar />
       </div>
-      <Footer />
     </>
   );
 };
