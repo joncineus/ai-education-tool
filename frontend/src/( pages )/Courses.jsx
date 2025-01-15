@@ -2,6 +2,7 @@ import Footer from '../( components )/Footer'
 import SearchBar from '../( components )/Searchbar'
 import FeaturedCourses from '../( components )/Features';
 import NavigationBar from '../NavigationBar';
+import { useState } from 'react';
 
 const courses = [
   {
