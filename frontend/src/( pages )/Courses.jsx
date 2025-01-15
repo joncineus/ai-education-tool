@@ -1,9 +1,7 @@
-import CourseCard from '../( components )/CourseCard'
-import Pagination from '../( components )/Pagination'
 import Footer from '../( components )/Footer'
 import SearchBar from '../( components )/Searchbar'
-import FilterSidebar from '../( components )/Sidebar';
 import FeaturedCourses from '../( components )/Features';
+import NavigationBar from '../NavigationBar';
 import { useState } from 'react';
 
 const courses = [
@@ -69,6 +67,7 @@ const courses = [
 export default function App() {
   return (
     <div className="min-h-screen bg-white">
+      <NavigationBar />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex gap-8">
             <div>
@@ -77,6 +76,7 @@ export default function App() {
             </div>
         </div>
       </main>
+      <Footer />
     </div>
   )
 }
